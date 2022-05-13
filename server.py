@@ -70,13 +70,13 @@ def load_user_database():
     with open('users.txt', 'r') as f:
         lines = f.readlines()
         for line in lines:
+            line = line.strip()
             things = line.split('|')
             users[things[0]] = {}
             users[things[0]]['password'] = things[1]
-            users[things[0]]['score'] = things[2]
-            if len(things) == 4:
+            users[things[0]]['score'] = int(things[2])
+            if things[-1] != '':
                 users[things[0]]['questions_asked'] = [int(x) for x in things[3].split(',')]
-
             else:
                 users[things[0]]['questions_asked'] = []
     return users
